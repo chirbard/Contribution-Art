@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-version:
+  create-art-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +24,14 @@ jobs:
         echo $formatted_date
         contribution_count_today=$(grep "$formatted_date " "daily.conf" | awk '{print $2}')
         echo $contribution_count_today
-        
+
+        mkdir $formatted_date
+        cd $formatted_date
+        for i in {1..$contribution_count_today}
+        do
+          echo "Number: $i" > "$i.txt"
+          git add --all
+          git commit -m "feat: Creating art"
+          git push
+        done
+
