@@ -1,0 +1,27 @@
+name: Create Art
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build-version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: '0'
+    - name: git
+      run: |
+        git --version
+        git config user.name "chirbard"
+        git config user.email "73120520+chirbard@users.noreply.github.com"
+        git switch main
+        formatted_date=$(date -I)
+        echo $formatted_date
+        contribution_count_today=$(grep "$formatted_date " "daily.conf" | awk '{print $2}')
+        echo $contribution_count_today
+        
