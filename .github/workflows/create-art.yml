@@ -27,7 +27,7 @@ jobs:
 
         mkdir $formatted_date
         cd $formatted_date
-        for (( i = 0; i <= $contribution_count_today; i++ ))
+        for (( i = 1; i <= $contribution_count_today; i++ ))
         do
           echo "Number: $i" > "$i.txt"
           git add --all
