@@ -25,7 +25,7 @@ jobs:
           contribution_count_today=$(grep "$formatted_date " "daily.conf" | awk '{print $2}')
           echo $contribution_count_today
 
-          cd pixel
+          cd pixels
           mkdir $formatted_date
           cd $formatted_date
           for (( i = 1; i <= $contribution_count_today; i++ ))
