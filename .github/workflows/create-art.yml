@@ -10,28 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Git checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: '0'
-    - name: git
-      run: |
-        git --version
-        git config user.name "chirbard"
-        git config user.email "73120520+chirbard@users.noreply.github.com"
-        git switch main
-        formatted_date=$(date -I)
-        echo $formatted_date
-        contribution_count_today=$(grep "$formatted_date " "daily.conf" | awk '{print $2}')
-        echo $contribution_count_today
+      - name: Git checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "0"
+      - name: git
+        run: |
+          git --version
+          git config user.name "chirbard"
+          git config user.email "73120520+chirbard@users.noreply.github.com"
+          git switch main
+          formatted_date=$(date -I)
+          echo $formatted_date
+          contribution_count_today=$(grep "$formatted_date " "daily.conf" | awk '{print $2}')
+          echo $contribution_count_today
 
-        mkdir $formatted_date
-        cd $formatted_date
-        for (( i = 1; i <= $contribution_count_today; i++ ))
-        do
-          echo "Number: $i" > "$i.txt"
-          git add --all
-          git commit -m "feat: Creating art"
-          git push
-        done
-
+          cd pixel
+          mkdir $formatted_date
+          cd $formatted_date
+          for (( i = 1; i <= $contribution_count_today; i++ ))
+          do
+            echo "Number: $i" > "$i.txt"
+            git add --all
+            git commit -m "feat: add pixel at $formatted_date"
+            git push
+          done
